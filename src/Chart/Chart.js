@@ -12,26 +12,64 @@ class Chart extends Component {
     this.state = {
       family: 'files',
       records: [],
-      start: '',
-      end: '',
+      start: new Date(2019, 2, 16, 12, 0, 0).toString(),
+      end: new Date(2019, 2, 16, 12, 15, 0).toString(),
     }
-    
-    this.handleClick = this.handleClick.bind(this);
+
     this.handleChange = this.handleChange.bind(this);
+    this.handleRecords = this.handleRecords.bind(this);
+    this.onStartTimeChange = this.onStartTimeChange.bind(this);
+    this.onEndTimeChange = this.onEndTimeChange.bind(this);
   }
 
   componentDidMount() {
-    let filter = metrics.filter((record) => { return 1 });
-    this.setState({ records: filter });
+    this.handleRecords(this.state.start, this.state.end);
   }
   
-  handleClick() {
-    let filter = metrics.filter((record) => { return 0 });
-    this.setState({ records: filter });
-  }
-
   handleChange(event) {
     this.setState({ family: event.target.value });
+  }
+
+  onStartTimeChange(newDate) {
+    this.setState({ start: new Date(newDate).toString() });
+    this.handleRecords(newDate, this.state.end);
+  }
+
+  onEndTimeChange(newDate) {
+    this.setState({ end: new Date(newDate).toString() });
+    this.handleRecords(this.state.start, newDate);
+  }
+
+  handleRecords(startDate, endDate) {
+    let result = [];
+    let start = new Date(startDate);
+    let end = new Date(endDate);
+
+    metrics.forEach(element => {
+      element.width = 70;
+      
+      if (element.time) {
+        let splitResult = element.time.split(' ');
+        splitResult = splitResult[1].split(':');
+        
+        let eltDate = new Date(2019, 2, 16, splitResult[0], splitResult[1], splitResult[2]);
+        
+        if (eltDate > start && eltDate < end) {
+          result.push(element);
+        }
+      }
+    });
+    
+    // Smallest element, largest element
+    let smallest = result[0][this.state.family];
+
+    console.log(smallest);
+
+    result.forEach(element => {
+    
+    })
+    
+    this.setState({ records: result }); 
   }
   
   render() {
@@ -60,12 +98,12 @@ class Chart extends Component {
         </select>
 
         
-        <Datepicker></Datepicker>
-        <Datepicker></Datepicker>
+        <Datepicker time={this.state.start} onTimeChange={this.onStartTimeChange}></Datepicker>
+        <Datepicker time={this.state.end} onTimeChange={this.onEndTimeChange}></Datepicker>
 
-        
+
         <div className="Chart">
-          {this.state.records.map((record, index) => { return <Bar key={index} data={record[this.state.family]} /> })}
+          {this.state.records.map((record, index) => { return <Bar key={index} time={record.time} data={record[this.state.family]} width={record.width} /> })}
         </div>
       </div>
     );

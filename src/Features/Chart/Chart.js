@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import './Chart.css';
+import './Chart.scss';
 import Bar from '../Bar/Bar';
 import Datepicker from '../Datepicker/Datepicker';
-
-import metrics from '../data/metrics.json';
+import metrics from '../../data/metrics.json';
 
 class Chart extends Component {
   constructor(props) {

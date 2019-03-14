@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './Bar.css';
+import './Bar.scss';
 
 class Bar extends Component {
   render() {

@@ -1,13 +1,13 @@
 {
-  "main.css": "/static/css/main.7eecf5ac.chunk.css",
-  "main.js": "/static/js/main.2767cbb0.chunk.js",
-  "main.js.map": "/static/js/main.2767cbb0.chunk.js.map",
-  "runtime~main.js": "/static/js/runtime~main.a8a9905a.js",
-  "runtime~main.js.map": "/static/js/runtime~main.a8a9905a.js.map",
-  "static/js/2.2d896ddf.chunk.js": "/static/js/2.2d896ddf.chunk.js",
-  "static/js/2.2d896ddf.chunk.js.map": "/static/js/2.2d896ddf.chunk.js.map",
-  "index.html": "/index.html",
-  "precache-manifest.1158d89789125c46443ae4ced5a1c2d5.js": "/precache-manifest.1158d89789125c46443ae4ced5a1c2d5.js",
-  "service-worker.js": "/service-worker.js",
-  "static/css/main.7eecf5ac.chunk.css.map": "/static/css/main.7eecf5ac.chunk.css.map"
+  "main.css": "/datavision/static/css/main.7eecf5ac.chunk.css",
+  "main.js": "/datavision/static/js/main.45d96d8a.chunk.js",
+  "main.js.map": "/datavision/static/js/main.45d96d8a.chunk.js.map",
+  "runtime~main.js": "/datavision/static/js/runtime~main.b62838cd.js",
+  "runtime~main.js.map": "/datavision/static/js/runtime~main.b62838cd.js.map",
+  "static/js/2.2d896ddf.chunk.js": "/datavision/static/js/2.2d896ddf.chunk.js",
+  "static/js/2.2d896ddf.chunk.js.map": "/datavision/static/js/2.2d896ddf.chunk.js.map",
+  "index.html": "/datavision/index.html",
+  "precache-manifest.c87dfa9262744c59af291e6cd34ce316.js": "/datavision/precache-manifest.c87dfa9262744c59af291e6cd34ce316.js",
+  "service-worker.js": "/datavision/service-worker.js",
+  "static/css/main.7eecf5ac.chunk.css.map": "/datavision/static/css/main.7eecf5ac.chunk.css.map"
 }

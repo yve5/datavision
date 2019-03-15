@@ -44,7 +44,7 @@ class Datepicker extends Component {
   
   render() {
     let hours = [];
-    for (let i=0; i<24; i++) {
+    for (let i=10; i<15; i++) {
       hours.push(<option value={i} key={'ho-' + i}>{ ('0' + i).slice(-2) }</option>);
     }
 

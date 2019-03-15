@@ -2,6 +2,7 @@
   "name": "datavision",
   "version": "0.1.0",
   "private": true,
+  "homepage": "http://yve5.github.io/datavision",
   "dependencies": {
     "gh-pages": "^2.0.1",
     "node-sass": "^4.11.0",

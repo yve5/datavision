@@ -1,13 +1,13 @@
 {
-  "main.css": "/datavision/static/css/main.7eecf5ac.chunk.css",
-  "main.js": "/datavision/static/js/main.45d96d8a.chunk.js",
-  "main.js.map": "/datavision/static/js/main.45d96d8a.chunk.js.map",
+  "main.css": "/datavision/static/css/main.4dc70c3f.chunk.css",
+  "main.js": "/datavision/static/js/main.9fe09d23.chunk.js",
+  "main.js.map": "/datavision/static/js/main.9fe09d23.chunk.js.map",
   "runtime~main.js": "/datavision/static/js/runtime~main.b62838cd.js",
   "runtime~main.js.map": "/datavision/static/js/runtime~main.b62838cd.js.map",
-  "static/js/2.2d896ddf.chunk.js": "/datavision/static/js/2.2d896ddf.chunk.js",
-  "static/js/2.2d896ddf.chunk.js.map": "/datavision/static/js/2.2d896ddf.chunk.js.map",
+  "static/js/2.1279535a.chunk.js": "/datavision/static/js/2.1279535a.chunk.js",
+  "static/js/2.1279535a.chunk.js.map": "/datavision/static/js/2.1279535a.chunk.js.map",
   "index.html": "/datavision/index.html",
-  "precache-manifest.c87dfa9262744c59af291e6cd34ce316.js": "/datavision/precache-manifest.c87dfa9262744c59af291e6cd34ce316.js",
+  "precache-manifest.ba6d1226a7ab7896f89b59e9f81eb532.js": "/datavision/precache-manifest.ba6d1226a7ab7896f89b59e9f81eb532.js",
   "service-worker.js": "/datavision/service-worker.js",
-  "static/css/main.7eecf5ac.chunk.css.map": "/datavision/static/css/main.7eecf5ac.chunk.css.map"
+  "static/css/main.4dc70c3f.chunk.css.map": "/datavision/static/css/main.4dc70c3f.chunk.css.map"
 }

@@ -3,6 +3,7 @@ import './Chart.scss';
 import Bar from '../Bar/Bar';
 import Datepicker from '../Datepicker/Datepicker';
 import metrics from '../../data/metrics.json';
+import { SMALLEST_PERCENTAGE } from '../../config/constants';
 
 class Chart extends Component {
   constructor(props) {
@@ -67,10 +68,10 @@ class Chart extends Component {
       if (element.time) {
         element.width = 70;
       
-        let splitResult = element.time.split(' ');
-        splitResult = splitResult[1].split(':');
+        let pieces = element.time.split(' ');
+        pieces = pieces[1].split(':');
         
-        let eltDate = new Date(2019, 2, 16, splitResult[0], splitResult[1], splitResult[2]);
+        let eltDate = new Date(2019, 2, 16, pieces[0], pieces[1], pieces[2]);
         
         if (eltDate >= start && eltDate <= end) {
           results.push(element);
@@ -82,7 +83,6 @@ class Chart extends Component {
       // Smallest, largest, average
       let smallest = results[0][family];
       let largest = results[0][family];
-      let smallestPercentage = 1;
       let average = 0;
       
       results.forEach(result => {
@@ -99,18 +99,18 @@ class Chart extends Component {
 
       average = Math.round((average / results.length) * 100) / 100;
       average = (smallest !== largest) 
-        ? ((100 - smallestPercentage) * (average - smallest)) / (largest - smallest) 
+        ? ((100 - SMALLEST_PERCENTAGE) * (average - smallest)) / (largest - smallest) 
         : 0;
-      average = Math.round((average + smallestPercentage) * 100) / 100;
+      average = Math.round((average + SMALLEST_PERCENTAGE) * 100) / 100;
 
       // Width calculation
       results.forEach(result => {
         result.width = (smallest !== largest) 
-        ? ((100 - smallestPercentage) * (result[family] - smallest)) 
+        ? ((100 - SMALLEST_PERCENTAGE) * (result[family] - smallest)) 
           / (largest - smallest) 
         : 0;
         
-        result.width = Math.round((result.width + smallestPercentage) * 100) / 100;
+        result.width = Math.round((result.width + SMALLEST_PERCENTAGE) * 100) / 100;
         result.average = average;
       });
     }

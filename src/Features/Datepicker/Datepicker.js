@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './Datepicker.scss';
+import { HOUR_RANGE_START, HOUR_RANGE_END, SEC_MIN_RANGE_START, SEC_MIN_RANGE_END } from '../../config/constants';
 
 class Datepicker extends Component {
   constructor(props) {
@@ -44,20 +44,20 @@ class Datepicker extends Component {
   
   render() {
     let hours = [];
-    for (let i=10; i<15; i++) {
+    for (let i=HOUR_RANGE_START; i<HOUR_RANGE_END; i++) {
       hours.push(<option value={i} key={'ho-' + i}>{ ('0' + i).slice(-2) }</option>);
     }
 
-    let secondsMinutes = [];
-    for (let i=0; i<60; i++) {
-      secondsMinutes.push(<option value={i} key={'sm-' + i}>{ ('0' + i).slice(-2) }</option>);
+    let secsMins = [];
+    for (let i=SEC_MIN_RANGE_START; i<SEC_MIN_RANGE_END; i++) {
+      secsMins.push(<option value={i} key={'sm-' + i}>{ ('0' + i).slice(-2) }</option>);
     }
 
     return (
       <div className="Datepicker">
         <select value={this.state.hours} onChange={this.handleHoursChange}>{hours}</select>
-        <select value={this.state.minutes} onChange={this.handleMinutesChange}>{secondsMinutes}</select>
-        <select value={this.state.seconds} onChange={this.handleSecondsChange}>{secondsMinutes}</select>
+        <select value={this.state.minutes} onChange={this.handleMinutesChange}>{secsMins}</select>
+        <select value={this.state.seconds} onChange={this.handleSecondsChange}>{secsMins}</select>
       </div>
     );
   }

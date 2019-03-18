@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/datavision/precache-manifest.ba6d1226a7ab7896f89b59e9f81eb532.js"
+  "/datavision/precache-manifest.c530d8acd191d0079086d9fa0cbb85fd.js"
 );
 
 workbox.clientsClaim();

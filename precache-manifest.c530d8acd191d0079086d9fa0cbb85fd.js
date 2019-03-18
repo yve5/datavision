@@ -4,19 +4,19 @@ self.__precacheManifest = [
     "url": "/datavision/static/js/runtime~main.b62838cd.js"
   },
   {
-    "revision": "0ff1f5a2717ba010ca64",
-    "url": "/datavision/static/js/main.9fe09d23.chunk.js"
+    "revision": "4fe6e25cd9609212e480",
+    "url": "/datavision/static/js/main.3a47bb48.chunk.js"
   },
   {
     "revision": "157f51664789baf60b64",
     "url": "/datavision/static/js/2.1279535a.chunk.js"
   },
   {
-    "revision": "0ff1f5a2717ba010ca64",
-    "url": "/datavision/static/css/main.4dc70c3f.chunk.css"
+    "revision": "4fe6e25cd9609212e480",
+    "url": "/datavision/static/css/main.34cf2720.chunk.css"
   },
   {
-    "revision": "03709eaf9da535590a840e71c4a42481",
+    "revision": "d31848a5de56684b8f605c427c2d84dd",
     "url": "/datavision/index.html"
   }
 ];

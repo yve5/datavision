@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './Chart.scss';
 import Bar from '../Bar/Bar';
 import Datepicker from '../Datepicker/Datepicker';
-import metrics from '../../data/metrics.json';
+import metrics from '../../config/metrics.json';
 import { SMALLEST_PERCENTAGE } from '../../config/constants';
 
 class Chart extends Component {
@@ -128,10 +128,10 @@ class Chart extends Component {
       <div>
         <h1>Metrics</h1>
 
-        <nav className="nav">
-          <div className="nav__item">
+        <nav className="Nav">
+          <div className="Nav__item">
             <select onChange={this.handleChange} value={this.state.family}>
-              {this.state.options.map((option, index) => { 
+              {this.state.options.map((option, index) => {
                 return <option value={option.value} key={index}>
                   {option.description}
                 </option>
@@ -139,23 +139,23 @@ class Chart extends Component {
             </select>
           </div>
           
-          <div className="nav__item">
-            <Datepicker time={this.state.start} 
+          <div className="Nav__item">
+            <Datepicker time={this.state.start}
                         onTimeChange={this.onStartTimeChange}></Datepicker>
           </div>
 
-          <div className="nav__item">
-            <Datepicker time={this.state.end} 
+          <div className="Nav__item">
+            <Datepicker time={this.state.end}
                         onTimeChange={this.onEndTimeChange}></Datepicker>
           </div>
         </nav>
 
         <div className="Chart">
           {this.state.records.map((record, index) => {
-            return <Bar key={index} 
-                        time={record.time} 
-                        data={record[this.state.family]} 
-                        average={record.average} 
+            return <Bar key={index}
+                        time={record.time}
+                        data={record[this.state.family]}
+                        average={record.average}
                         width={record.width} />
           })}
         </div>

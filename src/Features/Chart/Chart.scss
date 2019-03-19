@@ -6,7 +6,7 @@
   display: flex;
   flex-wrap: wrap;
   border-style: solid;
-  border-width: 1px 0;
+  border-width: 1px 0 1px 0;
   border-color: #ddd;
   
   &__item {
@@ -15,6 +15,20 @@
 
   select {
     background: #fff;
-    padding: 5px;
+  }
+}
+
+.Alert {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+
+  border-style: solid;
+  border-width: 0 0 1px 0;
+  border-color: #ddd;
+  
+  &__item {
+    padding: 10px;
+    flex-grow: 1;
   }
 }

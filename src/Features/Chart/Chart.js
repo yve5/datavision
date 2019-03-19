@@ -35,6 +35,9 @@ class Chart extends Component {
       records: [],
       start: new Date(2019, 2, 16, 10, 0, 0).toString(),
       end: new Date(2019, 2, 16, 13, 0, 0).toString(),
+      min: {},
+      max: {},
+      average: null,
     }
 
     this.handleChange = this.handleChange.bind(this);
@@ -79,39 +82,60 @@ class Chart extends Component {
       }
     });
     
+    // Smallest, largest, average
+    let smallestElement = {};
+    let largestElement = {};
+    let realAverage = null;
+
     if (results.length) {
-      // Smallest, largest, average
-      let smallest = results[0][family];
-      let largest = results[0][family];
-      let average = 0;
+      let smallest, largest, barAverage, count;
+
+      smallest = largest = results[0][family];
+      smallestElement = largestElement = results[0];
+      barAverage = 0;
+      count = 0;
       
       results.forEach(result => {
-        if (smallest > result[family]) {
-          smallest = result[family];
-        }
-        
-        if (largest < result[family]) {
-          largest = result[family];
-        }
+        // In case of missing records
+        if (typeof result[family] !== 'undefined') {
+          if (smallest > result[family]) {
+            smallest = result[family];
+            smallestElement = result;
+          }
+          
+          if (largest < result[family]) {
+            largest = result[family];
+            largestElement = result;
+          }
 
-        average += result[family];
+          barAverage += result[family];
+          count++;
+        }
       });
 
-      average = Math.round((average / results.length) * 100) / 100;
-      average = (smallest !== largest) 
-        ? ((100 - SMALLEST_PERCENTAGE) * (average - smallest)) / (largest - smallest) 
-        : 0;
-      average = Math.round((average + SMALLEST_PERCENTAGE) * 100) / 100;
+      // Average calculation
+      realAverage = barAverage.toFixed(3) / count;
+      realAverage = realAverage.toFixed(3);
+
+      if (smallest !== largest) {
+        barAverage = (100 - SMALLEST_PERCENTAGE) * (realAverage - smallest);
+        barAverage /= (largest - smallest);
+        barAverage = (barAverage + SMALLEST_PERCENTAGE) * 100 / 100;
+        barAverage = Math.round(barAverage);
+      }
 
       // Width calculation
       results.forEach(result => {
-        result.width = (smallest !== largest) 
-        ? ((100 - SMALLEST_PERCENTAGE) * (result[family] - smallest)) 
-          / (largest - smallest) 
-        : 0;
-        
-        result.width = Math.round((result.width + SMALLEST_PERCENTAGE) * 100) / 100;
-        result.average = average;
+        result.width = 0;
+
+        if (smallest !== largest) {
+          result.width = (100 - SMALLEST_PERCENTAGE) * (result[family] - smallest);
+          result.width /= (largest - smallest);
+          result.width = (result.width + SMALLEST_PERCENTAGE) * 100 / 100;
+          result.width = Math.round(result.width);
+        }
+
+        result.average = barAverage;
       });
     }
 
@@ -120,10 +144,31 @@ class Chart extends Component {
       start: new Date(startDate).toString(),
       end: new Date(endDate).toString(),
       family: family,
+      min: smallestElement,
+      max: largestElement,
+      average: realAverage,
     });
   }
   
   render() {
+    let alert;
+
+    if (this.state.records.length) {
+      alert = <div className="Alert">
+                <div className="Alert__item">
+                  Min value: {this.state.min[this.state.family]}<br/>
+                  {this.state.min.time}
+                </div>
+                <div className="Alert__item">
+                  Max value: {this.state.max[this.state.family]}<br/>
+                  {this.state.max.time}
+                </div>
+                <div className="Alert__item">
+                  Average: {this.state.average}
+                </div>
+              </div>;
+    }
+    
     return (
       <div>
         <h1>Metrics</h1>
@@ -149,6 +194,8 @@ class Chart extends Component {
                         onTimeChange={this.onEndTimeChange}></Datepicker>
           </div>
         </nav>
+
+        {alert}
 
         <div className="Chart">
           {this.state.records.map((record, index) => {

@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
 import './Chart.scss';
 import Bar from '../Bar/Bar';
-import Datepicker from '../Datepicker/Datepicker';
 import metrics from '../../config/metrics.json';
 import { SMALLEST_PERCENTAGE } from '../../config/constants';
+
+
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+
 
 class Chart extends Component {
   constructor(props) {
@@ -33,8 +37,8 @@ class Chart extends Component {
       ],
       family: 'files',
       records: [],
-      start: new Date(2019, 2, 16, 10, 0, 0).toString(),
-      end: new Date(2019, 2, 16, 13, 0, 0).toString(),
+      start: new Date(2019, 2, 16, 10, 0, 0),
+      end: new Date(2019, 2, 16, 13, 0, 0),
       min: {},
       max: {},
       average: null,
@@ -47,25 +51,34 @@ class Chart extends Component {
   }
 
   componentDidMount() {
-    this.handleRecords(this.state.start, this.state.end, this.state.family);
+    this.handleRecords();
   }
-  
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.family !== this.state.family 
+        || prevState.start !== this.state.start 
+        || prevState.end !== this.state.end) {
+      this.handleRecords();
+    }
+  }
+
   handleChange(event) {
-    this.handleRecords(this.state.start, this.state.end, event.target.value);
+    this.setState({ family: event.target.value });
   }
 
   onStartTimeChange(newDate) {
-    this.handleRecords(newDate, this.state.end, this.state.family);
+    this.setState({ start: new Date(newDate) });
   }
 
   onEndTimeChange(newDate) {
-    this.handleRecords(this.state.start, newDate, this.state.family);
+    this.setState({ end: new Date(newDate) });
   }
 
-  handleRecords(startDate, endDate, family) {
+  handleRecords() {
     let results = [];
-    let start = new Date(startDate);
-    let end = new Date(endDate);
+    let start = new Date(this.state.start);
+    let end = new Date(this.state.end);
+    let family = this.state.family;
 
     metrics.forEach(element => {
       if (element.time) {
@@ -88,7 +101,10 @@ class Chart extends Component {
     let realAverage = null;
 
     if (results.length) {
-      let smallest, largest, barAverage, count;
+      let smallest;
+      let largest;
+      let barAverage;
+      let count;
 
       smallest = largest = results[0][family];
       smallestElement = largestElement = results[0];
@@ -141,9 +157,6 @@ class Chart extends Component {
 
     this.setState({
       records: results,
-      start: new Date(startDate).toString(),
-      end: new Date(endDate).toString(),
-      family: family,
       min: smallestElement,
       max: largestElement,
       average: realAverage,
@@ -185,13 +198,27 @@ class Chart extends Component {
           </div>
           
           <div className="Nav__item">
-            <Datepicker time={this.state.start}
-                        onTimeChange={this.onStartTimeChange}></Datepicker>
+            <DatePicker
+              selected={this.state.start}
+              onChange={this.onStartTimeChange}
+              dateFormat="MMMM d, yyyy h:mm aa"
+              timeIntervals={10}
+              minDate={new Date(2019, 2, 16, 10)}
+              maxDate={new Date(2019, 2, 16, 10)}
+              showTimeSelect
+            />
           </div>
 
           <div className="Nav__item">
-            <Datepicker time={this.state.end}
-                        onTimeChange={this.onEndTimeChange}></Datepicker>
+            <DatePicker
+              selected={this.state.end}
+              onChange={this.onEndTimeChange}
+              dateFormat="MMMM d, yyyy h:mm aa"
+              timeIntervals={10}
+              minDate={new Date(2019, 2, 16, 10)}
+              maxDate={new Date(2019, 2, 16, 10)}
+              showTimeSelect
+            />
           </div>
         </nav>
 
